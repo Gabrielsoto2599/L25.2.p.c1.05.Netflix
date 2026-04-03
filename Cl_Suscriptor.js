@@ -1,19 +1,28 @@
 export default class Cl_Suscriptor {
     constructor(cedula, tipoplan) {
-        this.cedula = cedula;
-        this.tipoplan = tipoplan.toUpperCase();
+        this._cedula = "";
+        this._tipoplan = "";
+        this._cedula = cedula;
+        this._tipoplan = tipoplan;
     }
-
+    set cedula(cedula) {
+        this._cedula = cedula;
+    }
+    get cedula() {
+        return this._cedula;
+    }
+    set tipoplan(tipoplan) {
+        this._tipoplan = tipoplan;
+    }
+    get tipoplan() {
+        return this._tipoplan;
+    }
     montoPagar() {
-        switch (this.tipoplan) {
-            case "A": return 3 * 1.10; // $3.3
-            case "B": return 5 * 1.10; // $5.5
-            case "C": return 10; // $10 (Sin cargo extra)
-            default: return 0;
+        switch (this._tipoplan) {
+            case "A": return 3 * 1.10;
+            case "B": return 5 * 1.10;
+            default: return 10;
         }
     }
-
-    pagaConexion() {
-        return this.tipoplan !== "C";
-    }
 }
+
