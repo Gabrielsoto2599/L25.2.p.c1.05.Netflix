@@ -31,6 +31,3 @@ if (salida !== null) {
     salida.innerHTML += `Porcentaje de suscriptores que no pagaron servicio de conexión:  ${agencia.porcSucNoConex()}% <br>`;
     salida.innerHTML += ` Cuál es el plan favorito:  ${agencia.planFavorito()}  Plan A, Plan B y Plan C. <br>`;
 }
-else {
-    console.error("error");
-}
