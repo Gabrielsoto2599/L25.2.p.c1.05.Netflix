@@ -1,42 +1,35 @@
-import Cl_Suscriptor from "./Cl_Suscriptor.js";
+import Cl_Suscriptor from "./Cl_Suscriptor";
 
-export default class Cl_Agencia{
-    private _contNoConex: number = 0;
-    private _contSuscriptor: number = 0;
-    private _contPlanA: number =0;
-    private _contPlanB: number=0;
-    private _contPlanC: number =0;
-    
-    constructor(){}
-    procesarSuscriptor(suscriptor:Cl_Suscriptor){
-          this._contSuscriptor++
+export default class Cl_Agencia {
+    private contSuscriptores: number = 0;
+    private contNoConex: number = 0;
+    private contPlanA: number = 0;
+    private contPlanB: number = 0;
+    private contPlanC: number = 0;
 
-          if(suscriptor.tipoplan =="A" && "B")
-            this._contNoConex++
-          
+    procesarSuscriptor(s: Cl_Suscriptor): void {
+        this.contSuscriptores++;
 
-          if(suscriptor.tipoplan =="A"){ 
-             this._contPlanA++; 
-            }
-            else if(suscriptor.tipoplan =="B"){ 
-               this._contPlanB++ 
-            }
-            else this._contPlanC++
-          }
+        if (!s.pagaConexion()) {
+            this.contNoConex++;
+        }
 
-         porcSucNoConex(){
-            return (this._contNoConex/this._contSuscriptor)*100;
-         }
+        if (s.tipoplan === "A") this.contPlanA++;
+        else if (s.tipoplan === "B") this.contPlanB++;
+        else if (s.tipoplan === "C") this.contPlanC++;
+    }
 
-          planFavorito(){
-            if(this._contPlanA > this._contPlanB && this._contPlanA > this._contPlanC){
-			return "A";
-		} else if(this._contPlanB > this._contPlanA && this._contPlanB > this._contPlanC){
-			return "B";
-		} else if(this._contPlanC > this._contPlanA && this._contPlanC > this._contPlanB){
-			return "C";
-		} 
-        else return "Iguales favorito";       
-            }
-         }
+    porcSucNoConex(): number {
+        return this.contSuscriptores > 0 ? (this.contNoConex / this.contSuscriptores) * 100 : 0;
+    }
+
+    planFavorito(): string {
+        const max = Math.max(this.contPlanA, this.contPlanB, this.contPlanC);
+        if (this.contPlanA === this.contPlanB && this.contPlanB === this.contPlanC) return "Empate (A, B y C)";
+        if (max === this.contPlanA) return "Plan A";
+        if (max === this.contPlanB) return "Plan B";
+        return "Plan C";
+    }
+}
+
     
