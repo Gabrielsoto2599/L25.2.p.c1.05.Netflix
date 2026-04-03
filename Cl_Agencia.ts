@@ -1,51 +1,42 @@
-import Cl_Suscriptor from "./Cl_Suscriptor";
+import Cl_Suscriptor from "./Cl_Suscriptor.js";
 
-export default class Cl_Agencia {
-    private _contNoConex: number;
-    private _contSuscriptor: number;
-    private _contPlanA: number;
-    private _contPlanB: number;
-    private _contPlanC: number;
+export default class Cl_Agencia{
+    private _contNoConex: number = 0;
+    private _contSuscriptor: number = 0;
+    private _contPlanA: number =0;
+    private _contPlanB: number=0;
+    private _contPlanC: number =0;
     
-    constructor() {
-        this._contNoConex = 0;
-        this._contSuscriptor = 0;
-        this._contPlanA = 0;
-        this._contPlanB = 0;
-        this._contPlanC = 0;
-    }
+    constructor(){}
+    procesarSuscriptor(suscriptor:Cl_Suscriptor){
+          this._contSuscriptor++
 
-    procesarSuscriptor(suscriptor: Cl_Suscriptor): void {
-        this._contSuscriptor++;
+          if(suscriptor.tipoplan =="A" && "B")
+            this._contNoConex++
+          
 
-        // CORRECCIÓN: Los planes A y B son los que pagan conexión
-        // Si queremos contar los que NO PAGARON (solo el Plan C)
-        if (suscriptor.tipoplan === "C") {
-            this._contNoConex++;
-        }
+          if(suscriptor.tipoplan =="A"){ 
+             this._contPlanA++; 
+            }
+            else if(suscriptor.tipoplan =="B"){ 
+               this._contPlanB++ 
+            }
+            else this._contPlanC++
+          }
 
-        // Conteo por tipo de plan
-        if (suscriptor.tipoplan === "A") {
-            this._contPlanA++;
-        } else if (suscriptor.tipoplan === "B") {
-            this._contPlanB++;
-        } else if (suscriptor.tipoplan === "C") {
-            this._contPlanC++;
-        }
-    }
+         porcSucNoConex(){
+            return (this._contNoConex/this._contSuscriptor)*100;
+         }
 
-    porcSucNoConex(): number {
-        return this._contSuscriptor > 0 ? (this._contNoConex / this._contSuscriptor) * 100 : 0;
-    }
-
-    planFavorito(): string {
-        const max = Math.max(this._contPlanA, this._contPlanB, this._contPlanC);
-        if (this._contPlanA === this._contPlanB && this._contPlanB === this._contPlanC) return "Empate (A, B y C)";
-        if (max === this._contPlanA) return "Plan A";
-        if (max === this._contPlanB) return "Plan B";
-        return "Plan C";
-    }
-}
-
-
+          planFavorito(){
+            if(this._contPlanA > this._contPlanB && this._contPlanA > this._contPlanC){
+			return "A";
+		} else if(this._contPlanB > this._contPlanA && this._contPlanB > this._contPlanC){
+			return "B";
+		} else if(this._contPlanC > this._contPlanA && this._contPlanC > this._contPlanB){
+			return "C";
+		} 
+        else return "Iguales favorito";       
+            }
+         }
     
