@@ -17,25 +17,30 @@ La salida corresponde a los siguientes datos del suscriptor (cedula, tipo plan):
 import Cl_Agencia from "./Cl_Agencia";
 import Cl_Suscriptor from "./Cl_Suscriptor";
 
+// 1. Instanciamos los datos de prueba
+const suscriptor1 = new Cl_Suscriptor("15457858", "A");
+const suscriptor2 = new Cl_Suscriptor("15457859", "B");
+const suscriptor3 = new Cl_Suscriptor("15457667", "C");
+
 const agencia = new Cl_Agencia();
-const clientes = [
-    new Cl_Suscriptor("15457858", "A"),
-    new Cl_Suscriptor("15457859", "B"),
-    new Cl_Suscriptor("15457667", "C")
-];
 
-const app = document.getElementById("app");
+// 2. Procesamos en la agencia
+agencia.procesarSuscriptor(suscriptor1);
+agencia.procesarSuscriptor(suscriptor2);
+agencia.procesarSuscriptor(suscriptor3);
 
-if (app) {
-    app.innerHTML = "<h1>Soto System - Streaming Analytics</h1><hr>";
-    clientes.forEach(c => {
-        agencia.procesarSuscriptor(c);
-        app.innerHTML += `Suscriptor ${c.cedula} paga: <strong>$${c.montoPagar().toFixed(2)}</strong><br>`;
-    });
+// 3. Salida por pantalla (usando el ID 'salida' de tu index.html)
+const interfaz = document.getElementById("salida");
 
-    app.innerHTML += `
+if (interfaz) {
+    interfaz.innerHTML = `
+        <h1>Soto System - Netflix Analytics</h1>
         <hr>
-        <p>Porcentaje sin conexión: <strong>${agencia.porcSucNoConex().toFixed(2)}%</strong></p>
+        El suscriptor con cédula ${suscriptor1.cedula} paga: <strong>$${suscriptor1.montoPagar().toFixed(2)}</strong><br>
+        El suscriptor con cédula ${suscriptor2.cedula} paga: <strong>$${suscriptor2.montoPagar().toFixed(2)}</strong><br>
+        El suscriptor con cédula ${suscriptor3.cedula} paga: <strong>$${suscriptor3.montoPagar().toFixed(2)}</strong><br>
+        <hr>
+        <p>Porcentaje de suscriptores sin conexión: <strong>${agencia.porcSucNoConex().toFixed(2)}%</strong></p>
         <p>Plan favorito: <strong>${agencia.planFavorito()}</strong></p>
     `;
-}
+
