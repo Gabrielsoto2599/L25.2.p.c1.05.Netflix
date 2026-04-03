@@ -15,26 +15,22 @@ La salida corresponde a los siguientes datos del suscriptor (cedula, tipo plan):
 (15457858, A) (15457859, B) (15457667, C) */
 import Cl_Agencia from "./Cl_Agencia.js";
 import Cl_Suscriptor from "./Cl_Suscriptor.js";
-
+const suscriptor1 = new Cl_Suscriptor("15457858", "A");
+const suscriptor2 = new Cl_Suscriptor("15457859", "B");
+const suscriptor3 = new Cl_Suscriptor("15457667", "C");
 const agencia = new Cl_Agencia();
-
-const clientes = [
-    new Cl_Suscriptor("15457858", "A"),
-    new Cl_Suscriptor("15457859", "B"),
-    new Cl_Suscriptor("15457667", "C")
-];
-
-let interfaz = document.getElementById("salida");
-interfaz.innerHTML = "<h2>Soto System - Gestión Netflix</h2><hr>";
-
-clientes.forEach(c => {
-    agencia.procesarSuscriptor(c);
-    interfaz.innerHTML += `Suscriptor ${c.cedula} paga: <strong>$${c.montoPagar().toFixed(2)}</strong><br>`;
-});
-
-interfaz.innerHTML += `
-    <hr>
-    <p>Porcentaje sin cargo de conexión: <strong>${agencia.porcSucNoConex().toFixed(2)}%</strong></p>
-    <p>Plan más solicitado: <strong>${agencia.planFavorito()}</strong></p>
-`;
-
+agencia.procesarSuscriptor(suscriptor1);
+agencia.procesarSuscriptor(suscriptor2);
+agencia.procesarSuscriptor(suscriptor3);
+let salida = document.getElementById("salida");
+if (salida !== null) {
+    salida.innerHTML += `El suscriptor con cedula ${suscriptor1.cedula}  paga: ${suscriptor1.montoPagar()} <br>`;
+    salida.innerHTML += `El suscriptor con cedula ${suscriptor2.cedula}  paga: ${suscriptor2.montoPagar()} <br>`;
+    salida.innerHTML += `El suscriptor con cedula ${suscriptor3.cedula}  paga: ${suscriptor3.montoPagar()} <br>`;
+    salida.innerHTML += `<br>`;
+    salida.innerHTML += `Porcentaje de suscriptores que no pagaron servicio de conexión:  ${agencia.porcSucNoConex()}% <br>`;
+    salida.innerHTML += ` Cuál es el plan favorito:  ${agencia.planFavorito()}  Plan A, Plan B y Plan C. <br>`;
+}
+else {
+    console.error("error");
+}
