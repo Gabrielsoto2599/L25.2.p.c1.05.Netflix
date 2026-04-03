@@ -1,37 +1,40 @@
+import Cl_Suscriptor from "./Cl_Suscriptor.js";
 export default class Cl_Agencia {
     constructor() {
-        this.contSuscriptores = 0;
-        this.contNoConex = 0;
-        this.contPlanA = 0;
-        this.contPlanB = 0;
-        this.contPlanC = 0;
+        this._contNoConex = 0;
+        this._contSuscriptor = 0;
+        this._contPlanA = 0;
+        this._contPlanB = 0;
+        this._contPlanC = 0;
     }
-
-    procesarSuscriptor(s) {
-        this.contSuscriptores++;
-        
-        // El Plan C es el único que NO paga conexión
-        if (!s.pagaConexion()) {
-            this.contNoConex++;
+    procesarSuscriptor(suscriptor) {
+        this._contSuscriptor++;
+        if (suscriptor.tipoplan == "A" && "B")
+            this._contNoConex++;
+        if (suscriptor.tipoplan == "A") {
+            this._contPlanA++;
         }
-
-        if (s.tipoplan === "A") this.contPlanA++;
-        else if (s.tipoplan === "B") this.contPlanB++;
-        else if (s.tipoplan === "C") this.contPlanC++;
+        else if (suscriptor.tipoplan == "B") {
+            this._contPlanB++;
+        }
+        else
+            this._contPlanC++;
     }
-
     porcSucNoConex() {
-        if (this.contSuscriptores === 0) return 0;
-        return (this.contNoConex / this.contSuscriptores) * 100;
+        return (this._contNoConex / this._contSuscriptor) * 100;
     }
-
     planFavorito() {
-        let max = Math.max(this.contPlanA, this.contPlanB, this.contPlanC);
-        if (this.contPlanA === this.contPlanB && this.contPlanB === this.contPlanC) 
-            return "Empate técnico (A, B y C)";
-        
-        if (max === this.contPlanA) return "Plan A";
-        if (max === this.contPlanB) return "Plan B";
-        return "Plan C";
+        if (this._contPlanA > this._contPlanB && this._contPlanA > this._contPlanC) {
+            return "A";
+        }
+        else if (this._contPlanB > this._contPlanA && this._contPlanB > this._contPlanC) {
+            return "B";
+        }
+        else if (this._contPlanC > this._contPlanA && this._contPlanC > this._contPlanB) {
+            return "C";
+        }
+        else
+            return "Iguales favorito";
     }
 }
+
