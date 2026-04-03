@@ -37,5 +37,3 @@ export default class Cl_Agencia {
             return "Iguales favorito";
     }
 }
-
-
