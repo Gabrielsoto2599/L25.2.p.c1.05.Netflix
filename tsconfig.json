@@ -1,31 +1,44 @@
 {
+  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig to read more about this file */
+    // File Layout
+    // "rootDir": "./src",
+    // "outDir": "./dist",
 
-    /* Language and Environment */
-    "target": "ES2022", /* Versión moderna para Soto System */
-    "lib": ["DOM", "ESNext"], /* Necesario para trabajar con el navegador */
-    
-    /* Modules */
-    "module": "ESNext", /* Para que los import/export funcionen bien */
-    "moduleResolution": "node",
-    "rootDir": "./", /* Tu raíz de proyecto */
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    //"module": "nodenext",
+    "target": "es2016",
+    //"types": [],
+    // For nodejs:
+    // "lib": ["esnext"],
+    // "types": ["node"],
+    // and npm install -D @types/node
 
-    /* Emit */
-    "outDir": "./", /* Genera los .js en la misma carpeta */
-    "removeComments": true,
-    "noEmitOnError": true,
+    // Other Outputs
+    //"sourceMap": true,
+    //"declaration": true,
+    //"declarationMap": true,
 
-    /* JavaScript Support */
-    "allowJs": true, /* Por si mezclas archivos .js viejos */
-    "checkJs": false, /* No revisa errores en los .js para no estresarte */
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
 
-    /* Interop Constraints */
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    // Style Options
+    // "noImplicitReturns": true,
+    // "noImplicitOverride": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "noPropertyAccessFromIndexSignature": true,
 
-    /* Type Checking */
-    "strict": true, /* El sello de calidad de un Senior */
-    "skipLibCheck": true /* Omite revisar librerías externas */
+    // Recommended Options
+    "strict": true,
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true,
   }
 }
