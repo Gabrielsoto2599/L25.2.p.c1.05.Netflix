@@ -14,27 +14,28 @@ Cuál es el plan favorito: Iguales de favorito: Plan A, Plan B y Plan C.
 La salida corresponde a los siguientes datos del suscriptor (cedula, tipo plan): 
 (15457858, A) (15457859, B) (15457667, C) */
 
-import Cl_Agencia from "./Cl_Agencia.js";
-import Cl_Suscriptor from "./Cl_Suscriptor.js";
+import Cl_Agencia from "./Cl_Agencia";
+import Cl_Suscriptor from "./Cl_Suscriptor";
 
-const suscriptor1: Cl_Suscriptor = new Cl_Suscriptor("15457858", "A")
-const suscriptor2: Cl_Suscriptor = new Cl_Suscriptor("15457859", "B")
-const suscriptor3: Cl_Suscriptor = new Cl_Suscriptor("15457667", "C")
+const agencia = new Cl_Agencia();
+const clientes = [
+    new Cl_Suscriptor("15457858", "A"),
+    new Cl_Suscriptor("15457859", "B"),
+    new Cl_Suscriptor("15457667", "C")
+];
 
-const agencia: Cl_Agencia = new Cl_Agencia();
-agencia.procesarSuscriptor(suscriptor1);
-agencia.procesarSuscriptor(suscriptor2);
-agencia.procesarSuscriptor(suscriptor3);
+const app = document.getElementById("app");
 
-let salida: HTMLElement | null = document.getElementById("salida");
-if(salida !==null){
-      salida.innerHTML += `El suscriptor con cedula ${suscriptor1.cedula}  paga: ${suscriptor1.montoPagar()} <br>`;
-      salida.innerHTML += `El suscriptor con cedula ${suscriptor2.cedula}  paga: ${suscriptor2.montoPagar()} <br>`; 
-      salida.innerHTML += `El suscriptor con cedula ${suscriptor3.cedula}  paga: ${suscriptor3.montoPagar()} <br>`;
-      salida.innerHTML += `<br>`;
-      salida.innerHTML += `Porcentaje de suscriptores que no pagaron servicio de conexión:  ${agencia.porcSucNoConex()}% <br>`;
-      salida.innerHTML += ` Cuál es el plan favorito:  ${agencia.planFavorito()}  Plan A, Plan B y Plan C. <br>`;
-}
-else {
-    console.error("error")
+if (app) {
+    app.innerHTML = "<h1>Soto System - Streaming Analytics</h1><hr>";
+    clientes.forEach(c => {
+        agencia.procesarSuscriptor(c);
+        app.innerHTML += `Suscriptor ${c.cedula} paga: <strong>$${c.montoPagar().toFixed(2)}</strong><br>`;
+    });
+
+    app.innerHTML += `
+        <hr>
+        <p>Porcentaje sin conexión: <strong>${agencia.porcSucNoConex().toFixed(2)}%</strong></p>
+        <p>Plan favorito: <strong>${agencia.planFavorito()}</strong></p>
+    `;
 }
