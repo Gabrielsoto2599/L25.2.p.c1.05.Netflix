@@ -1,31 +1,31 @@
 {
   "compilerOptions": {
-    /* 1. Configuración del Entorno (Soto System 2026) */
-    "target": "ES2022",
-    "module": "ESNext",
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+
+    /* Language and Environment */
+    "target": "ES2022", /* Versión moderna para Soto System */
+    "lib": ["DOM", "ESNext"], /* Necesario para trabajar con el navegador */
+    
+    /* Modules */
+    "module": "ESNext", /* Para que los import/export funcionen bien */
     "moduleResolution": "node",
-    "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx", /* Mantenemos esto por si escalamos a React en el futuro */
+    "rootDir": "./", /* Tu raíz de proyecto */
 
-    /* 2. Organización de Archivos */
-    "rootDir": "./",
-    "outDir": "./",
-
-    /* 3. Reglas de Oro (Stricter Typechecking) */
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    /* Emit */
+    "outDir": "./", /* Genera los .js en la misma carpeta */
+    "removeComments": true,
     "noEmitOnError": true,
+
+    /* JavaScript Support */
+    "allowJs": true, /* Por si mezclas archivos .js viejos */
+    "checkJs": false, /* No revisa errores en los .js para no estresarte */
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
-    /* 4. Interoperabilidad y Limpieza */
-    "esModuleInterop": true,
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "removeComments": true
-  },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+    /* Type Checking */
+    "strict": true, /* El sello de calidad de un Senior */
+    "skipLibCheck": true /* Omite revisar librerías externas */
+  }
 }
-
